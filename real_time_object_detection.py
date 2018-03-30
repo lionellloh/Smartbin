@@ -10,6 +10,8 @@ import imutils
 import time
 import cv2
 
+
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--prototxt", required=True,
@@ -35,15 +37,19 @@ net = cv2.dnn.readNetFromCaffe(args["prototxt"], args["model"])
 # initialize the video stream, allow the cammera sensor to warmup,
 # and initialize the FPS counter
 print("[INFO] starting video stream...")
-vs = VideoStream(src=0).start()
-time.sleep(2.0)
-fps = FPS().start()
+
+#vs = VideoStream(src=0).start()
+#print (vs)
+#time.sleep(2.0)
+#fps = FPS().start()
+
+cap = cv2.VideoCapture(0)
 
 # loop over the frames from the video stream
 while True:
 	# grab the frame from the threaded video stream and resize it
 	# to have a maximum width of 400 pixels
-	frame = vs.read()
+	ret, frame = cap.read()
 	frame = imutils.resize(frame, width=400)
 
 	# grab the frame dimensions and convert it to a blob
