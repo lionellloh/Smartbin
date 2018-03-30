@@ -1,0 +1,3 @@
+entrypoint: flask run
+env: flex
+runtime: python
