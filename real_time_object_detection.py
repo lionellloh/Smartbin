@@ -24,10 +24,7 @@ args = vars(ap.parse_args())
 
 # initialize the list of class labels MobileNet SSD was trained to
 # detect, then generate a set of bounding box colors for each class
-CLASSES = ["laptop", "bottle", "wallet", "bird", "boat",
-	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
-	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
-	"sofa", "train", "tvmonitor"]
+CLASSES = ["person","bottle"]
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
 # load our serialized model from disk
@@ -78,14 +75,14 @@ while True:
 			(startX, startY, endX, endY) = box.astype("int")
 
 			# draw the prediction on the frame
-			label = "{}: {:.2f}%".format(CLASSES[idx],
+			label = "{}: {:.2f}%".format(CLASSES[0],
 				confidence * 100)
 			cv2.rectangle(frame, (startX, startY), (endX, endY),
-				COLORS[idx], 2)
+				COLORS[1], 2)
 			y = startY - 15 if startY - 15 > 15 else startY + 15
 			cv2.putText(frame, label, (startX, y),
-				cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
-
+				cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[1], 2)
+        print(confidence)
 	# show the output frame
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
